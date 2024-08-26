@@ -1,0 +1,21 @@
+---
+'Al':
+  'file': 'al_pbe_v1.uspp.F.UPF'
+  'ecutwfc': 40
+  'ecutrho': 400
+  'alat': {'pbe': 4.0447, 'rpbe': ~, 'pbesol': ~}
+'Cu':
+  'file': 'cu_pbe_v1.2.uspp.F.UPF'
+  'ecutwfc': 55
+  'ecutrho': 440
+  'alat': {'pbe': 3.6285, 'rpbe': 3.6354, 'pbesol': ~}
+'Pt':
+  'file': 'pt_pbe_v1.4.uspp.F.UPF'
+  'ecutwfc': ~
+  'ecutrho': ~
+  'alat': {'pbe': 3.9671, 'rpbe': 3.9884, 'pbesol': ~ }
+'Au':
+  'file': 'au_pbe_v1.uspp.F.UPF'
+  'ecutwfc': 60
+  'ecutrho': 480
+  'alat': {'pbe': 4.1543, 'rpbe': 4.1926, 'pbesol': 4.0825}
