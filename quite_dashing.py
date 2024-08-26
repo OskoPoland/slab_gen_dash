@@ -16,6 +16,10 @@ import datetime
 import io
 from pathlib import Path
 
+# Local Imports
+from slab_gen import Slab, InterfaceBuilder
+from .cell_match_strain import gen_plot
+
 class App:
     def __init__(self):
         # Goal to insert desired fig generated from chosen files
@@ -32,6 +36,7 @@ class App:
         Timer(1, self.open_in_browser).start()
         self.app.run_server(debug=True, port=7000, use_reloader=False)
 
+    # Building starttup page where you can select graph to genera
     def build_startup_html(self):
         return html.Div(
             [
@@ -72,27 +77,33 @@ class App:
                     ],
                     className="container",
                 ),
-                dcc.Dropdown(["Plot Energies"], id="plot_selector_dropdown"),
-                html.Button('Generate Plot', id='gen_plot'),
                 html.Div([dcc.Graph('graph_content')], id='graph_container')
             ]
         )
-        
+    
+    # Generate the graphs. Current iteration will generate all graphs. 
+    # Currently:
+    #          1. # Atoms & Energy & Strain
     @callback(
         Output('graph_container', 'children'),
         [
             Input('slab1_upload', 'contents'),
             Input('slab1_upload', 'filename'),
             Input('slab2_upload', 'contents'),
-            Input('plot_selector_dropdown', 'value')
+            Input('slab2_upload', 'filename')
         ],
         State('gen_plot', 'value'),
         prevent_intial_call=True
     )
-    def generate_plot(self, slab1_upload, slab1_fname, slab2_upload, slab2_fname, plot_selector_dropdown):
+    def generate_plots(self, slab1_upload, slab1_fname, slab2_upload, slab2_fname, plot_selector_dropdown):
         if (slab1_upload is None or slab2_upload is None): return dash.no_update
         slab1 = self.save_file(slab1_upload, slab1_fname)
         slab2 = self.save_file(slab2_upload, slab1_fname)
+        interface = InterfaceBuilder(slab1, slab2)
+
+        return gen_plot(interface)
+
+
         
 
     # Force open in browser
