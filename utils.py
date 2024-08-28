@@ -6,7 +6,7 @@ from slab_gen import InterfaceBuilder, Slab
 test_chem1 = "C:\\Users\\Vinr5\\OneDrive\\Documents\\Repositories\\Adelstein-research\\codebase\\slab_gen-Arye\\scripts\\Build_interface\\Structures\\Li2CO3.POSCAR.vasp"
 test_chem2 = "C:\\Users\\Vinr5\\OneDrive\\Documents\\Repositories\\Adelstein-research\\codebase\\slab_gen-Arye\\scripts\\Build_interface\\Structures\\LiF.POSCAR.vasp"
 
-def gen_plot(interface):
+def energy_nat_strain(interface):
     # y = number of atoms - nat
     # x = mean abs strain - eps_av
     # Color = log_10(strain scores) - score
@@ -25,7 +25,7 @@ def gen_plot(interface):
     return fig
     
 def main():
-    gen_plot()
+    energy_nat_strain()
     
 if __name__ == "__main__":
     main()
