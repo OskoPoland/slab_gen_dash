@@ -47,8 +47,8 @@ class App:
     def callbacks(self, _app):
         @_app.callback(
         [
-            Output('slab1_upload', 'title'),
-            Output('slab2_upload', 'title')
+            Output('slab1', 'title'),
+            Output('slab2', 'title')
         ],
         [
             Input('slab1_upload', 'contents'),
@@ -65,10 +65,11 @@ class App:
             self.slab2 = self.save_file(slab2_upload, slab1_fname)
             self.interface = InterfaceBuilder(self.slab1, self.slab2)
             
+            nonstatic_structure = slab2_fname.split("\\")[-1]
             static_structure = slab1_fname.split("\\")[-1]
-            nonstatic_structures = slab2_fname.split("\\")[-1]
+
             
-            return static_structure, nonstatic_structures
+            return static_structure, nonstatic_structure
         
         
         @_app.callback(
@@ -111,7 +112,8 @@ class App:
                                         dcc.Upload(
                                             id="slab1_upload",
                                             children=html.Button(
-                                                "Upload Structure - Rotated"
+                                                "Upload Structure - Rotated",
+                                                id="slab1"
                                             ),
                                             multiple=False,
                                         )
@@ -123,7 +125,8 @@ class App:
                                         dcc.Upload(
                                             id="slab2_upload",
                                             children=html.Button(
-                                                "Upload Structure - Static"
+                                                "Upload Structure - Static",
+                                                id="slab2"
                                             ),
                                             multiple=False,
                                         ),
